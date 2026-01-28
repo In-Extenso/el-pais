@@ -21,7 +21,10 @@ function Carrito() {
             </div>
             <button className="bg-red-500 flex items-center p-4 rounded-md text-white gap-2">
                 <IconoirProvider>
-                    <Cart />
+                    <Cart 
+                      onPointerEnterCapture={undefined} 
+                      onPointerLeaveCapture={undefined} 
+                    />
                 </IconoirProvider>
                 Añadir al carrito
             </button>

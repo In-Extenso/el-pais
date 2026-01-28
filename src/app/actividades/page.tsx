@@ -41,7 +41,10 @@ function Actividades() {
                             onClick={() => setOrganigrama(false)}
                         >
                             <IconoirProvider>
-                                <Cancel />
+                                <Cancel 
+                                  onPointerEnterCapture={undefined} 
+                                  onPointerLeaveCapture={undefined} 
+                            />
                             </IconoirProvider>
                         </button>
                         <Image

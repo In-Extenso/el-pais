@@ -44,7 +44,7 @@ export const navLinks = [
         to: "/actividades",
     },
     {
-        text: "Periódico El País",
+        text: "Diario El País",
         to: "https://elpais.bo/",
     },
 ];
@@ -71,6 +71,70 @@ export const formInputs = [
                 message: "El apellido debe tener al menos 3 caracteres",
             },
         },
+    },
+    {
+        id: "fechaNacimiento",
+        label: "Fecha de Nacimiento",
+        type: "birthdate",
+        validations: {
+            required: "La fecha de nacimiento es requerida",
+            validate: {
+                validDate: (value: any) => {
+                    if (!value || !value.dia || !value.mes || !value.año) {
+                        return "Debe seleccionar día, mes y año";
+                    }
+                    
+                    const dia = parseInt(value.dia);
+                    const mes = parseInt(value.mes);
+                    const año = parseInt(value.año);
+                    
+                    // Verificar que la fecha sea válida
+                    const fecha = new Date(año, mes - 1, dia);
+                    if (fecha.getFullYear() !== año || 
+                        fecha.getMonth() !== mes - 1 || 
+                        fecha.getDate() !== dia) {
+                        return "La fecha seleccionada no es válida";
+                    }
+                    
+                    // Verificar que no sea una fecha futura
+                    const hoy = new Date();
+                    if (fecha > hoy) {
+                        return "La fecha de nacimiento no puede ser futura";
+                    }
+                    
+                    return true;
+                }
+            }
+        },
+        options: {
+            meses: [
+                { value: 1, label: "Enero" },
+                { value: 2, label: "Febrero" },
+                { value: 3, label: "Marzo" },
+                { value: 4, label: "Abril" },
+                { value: 5, label: "Mayo" },
+                { value: 6, label: "Junio" },
+                { value: 7, label: "Julio" },
+                { value: 8, label: "Agosto" },
+                { value: 9, label: "Septiembre" },
+                { value: 10, label: "Octubre" },
+                { value: 11, label: "Noviembre" },
+                { value: 12, label: "Diciembre" }
+            ],
+            getDiasValidosPorMes: (mes: number, año: number) => {
+                if (!mes || !año) return 31;
+                
+                const diasPorMes = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                
+                // Verificar año bisiesto para febrero
+                if (mes === 2) {
+                    const esBisiesto = (año % 4 === 0 && año % 100 !== 0) || (año % 400 === 0);
+                    return esBisiesto ? 29 : 28;
+                }
+                
+                return diasPorMes[mes - 1];
+            }
+        }
     },
     {
         id: "email",
@@ -153,62 +217,62 @@ export const pdfData = [
     },
     {
         id: 5,
-        text: "Acta de Junta Ordinaria de Accionistas sobre la gestión 2022",
-        to: "https://drive.google.com/file/d/17mcdzROi871WtRk1QgW7KgW5wdjbC6d9/view?usp=sharing",
-    },
-    {
-        id: 6,
-        text: "Informe de Auditoría 2022",
-        to: "https://drive.google.com/file/d/1izGrd9A_mfS23G0QRYM-1PjX4nEphawG/view?usp=sharing"
-    },
-    {
-        id: 7,
-        text: "Informe de Sindicatura 2022",
-        to: "https://drive.google.com/file/d/1uqTyAtirMGk_Lm2Y2GxeHf8a3nksmhcs/view?usp=sharing"
-    },
-    {
-        id: 8,
-        text: "Informe de Directorio 2022",
-        to: "https://drive.google.com/file/d/11M-zbTNH9G_SMwbru3_XWUoh8oW0v8Z4/view?usp=sharing"
-    },
-    {
-        id: 9,
-        text: "EEFF 2022",
-        to: "https://drive.google.com/file/d/1Z3eqBCpWJ3E4nEjjMIp5VYfGqbpacuvL/view?usp=sharing"
-    },
-    {
-        id: 10,
-        text: "Memoria Anual 2022",
-        to: "https://drive.google.com/file/d/1C1Y0uPoa12wwXFCRKq2hJSqKyE-TjRil/view?usp=sharing"
-    },
-    {
-        id: 11,
         text: "Acta de Junta Ordinaria de Accionistas sobre la gestión 2023",
         to: "https://drive.google.com/file/d/1KjT_I4tsoMsTkZZkWc7EOW7L4Ww4AulA/view?usp=sharing",
     },
     {
-        id: 12,
+        id: 6,
         text: "Informe de Auditoría 2023",
         to: "https://drive.google.com/file/d/1VKoejnlVc-PtE-9VTtdebAqQ9xoQUPSQ/view?usp=sharing"
     },
     {
-        id: 13,
+        id: 7,
         text: "Informe de Sindicatura 2023",
         to: "https://drive.google.com/file/d/1PJmi_oYVHMB27E3AcjqZOblFP64sAswR/view?usp=sharing"
     },
     {
-        id: 14,
+        id: 8,
         text: "Informe de Directorio 2023",
         to: "https://drive.google.com/file/d/1t5uslASo8kooQ62AmyJMfFk7cNHA9Qjw/view?usp=sharing"
     },
     {
-        id: 15,
+        id: 9,
         text: "EEFF 2023",
         to: "https://drive.google.com/file/d/1xNtcw-jvYS3OrxQ0EhQ8eJDvotvRGuZN/view?usp=sharing"
     },
     {
-        id: 16,
+        id: 10,
         text: "Memoria anual 2023",
         to: "https://drive.google.com/file/d/1zwaJFqpGAXv3tdtzaOBI6pmeljRKcNZS/view?usp=sharing"
+    },
+    {
+        id: 11,
+        text: "Acta de Junta Ordinaria de Accionistas sobre la gestión 2024",
+        to: "https://drive.google.com/file/d/16VFrmq0OVmDOy9KV_OjyuRDNPk3f71yY/view?usp=sharing",
+    },
+    {
+        id: 12,
+        text: "Informe de Auditoría 2024",
+        to: "https://drive.google.com/file/d/1cp-aED2Hy2mqV0yIWbgzfGWZlTY9yaRW/view?usp=sharing"
+    },
+    {
+        id: 13,
+        text: "Informe de Sindicatura 2024",
+        to: "https://drive.google.com/file/d/1atZ2xlWhkUXFz67ms7JgVelRx2krFm35/view?usp=sharing"
+    },
+    {
+        id: 14,
+        text: "Informe de Directorio 2024",
+        to: "https://drive.google.com/file/d/1oPzCFn8x4qQn3QLNPY-gLi6qYDS34G7m/view?usp=sharing"
+    },
+    {
+        id: 15,
+        text: "EEFF 2024",
+        to: "https://drive.google.com/file/d/1NZMfi1R4o6OwRO1HuMEEcMc22-Lpuub0/view?usp=sharing"
+    },
+    {
+        id: 16,
+        text: "Memoria anual 2024",
+        to: "https://drive.google.com/file/d/1DW3dy7jeaamH8BDms16-KSkElQEH1kQY/view?usp=sharing"
     }
 ];

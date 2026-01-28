@@ -13,6 +13,11 @@ import useCart from "@/app/hooks/useShoppingCart";
 type RegisterFormValues = {
     nombre: string;
     apellido: string;
+    fechaNacimiento: {
+        dia: string;
+        mes: string;
+        año: string;
+    };
     email: string;
     telefono: string;
     domicilio: string;
@@ -54,6 +59,8 @@ function RegisterForm() {
                     id={input.id}
                     label={input.label}
                     validations={input.validations}
+                    type={input.type}
+                    options={input.options}
                 />
             ))}
         </motion.form>,

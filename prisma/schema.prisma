@@ -6,7 +6,7 @@ datasource db {
   provider          = "postgresql"
   url               = env("POSTGRES_URL")
   directUrl         = env("POSTGRES_URL_NON_POOLING")
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_SHADOW_URL")
 }
 
 model Acciones {
@@ -26,6 +26,7 @@ model Registro {
   telefono     String
   ci           String
   apellido     String
+  fecha_nacimiento DateTime
 }
 
 model Deuda {
@@ -41,4 +42,5 @@ model Deuda {
   adquisicion  DateTime @default(now())
   telefono     String
   ci           String
+  fecha_nacimiento DateTime
 }
